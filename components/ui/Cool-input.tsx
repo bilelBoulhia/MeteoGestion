@@ -23,7 +23,7 @@ const FadeBlurInput = React.forwardRef<HTMLInputElement, InputProps>(
                     type="text"
                     className={cn(
                         className,
-                        'w-full p-2 pr-12 pl-5 placeholder:text-white bg-blue-400 rounded-xl focus:outline-none '
+                        'w-full p-2 pr-12 pl-5 placeholder:text-white bg-blue-400 rounded-xl focus:outline-none  '
                     )}
                     ref={ref}
                     {...props}

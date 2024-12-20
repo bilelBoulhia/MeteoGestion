@@ -28,7 +28,7 @@ export default function Login() {
                         className=" font-bold uppercase  bg-gradient-to-r from-blue-500 via-purple-500 to-orange-400 p-2 rounded-xl text-transparent bg-clip-text">administrateur</span>
                     </Label>
                 </div>
-                <div className='w-[320px] sm:w-[400px] p-[2rem] relative flex flex-col'>
+                <div className='w-[320px] sm:w-[400px] p-[2rem] mt-3 relative flex flex-col'>
                     <form className='justify-center gap-[2rem] flex-col flex'>
                         <div className='flex flex-col gap-2'>
                             {/*<Label className='text-gradient-primary p-2 font-bold text-black '>Nom d'utilisateur</Label>*/}

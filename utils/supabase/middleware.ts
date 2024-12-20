@@ -44,7 +44,7 @@ export const updateSession = async (request: NextRequest) => {
     }
 
     if (request.nextUrl.pathname === "/" && !user.error) {
-      return NextResponse.redirect(new URL("/main", request.url));
+      return NextResponse.redirect(new URL("/Pointage", request.url));
     }
 
     return response;
