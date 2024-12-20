@@ -23,7 +23,7 @@ const FadeBlurInput = React.forwardRef<HTMLInputElement, InputProps>(
                     type="text"
                     className={cn(
                         className,
-                        'w-full p-2 pr-12 pl-5 placeholder:text-white bg-blue-400 rounded-full focus:outline-none '
+                        'w-full p-2 pr-12 pl-5 placeholder:text-white bg-blue-400 rounded-xl focus:outline-none '
                     )}
                     ref={ref}
                     {...props}
@@ -31,7 +31,7 @@ const FadeBlurInput = React.forwardRef<HTMLInputElement, InputProps>(
 
                 <span
 
-                    className='absolute right-0 top-0 bottom-0 flex items-center justify-center w-10 p-1 text-white rounded-full focus:outline-none  bg-white/20 '
+                    className='absolute right-0 top-0 bottom-0 flex items-center justify-center w-10 p-1 text-white rounded-xl focus:outline-none  bg-white/20 '
 
                 >
                         <Icon size={16} className="backdrop-blur-sm "/>

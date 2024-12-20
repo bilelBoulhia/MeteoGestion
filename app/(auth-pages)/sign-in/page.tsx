@@ -102,9 +102,15 @@ export default function Login() {
                                     fontWeight: 'bold',
                                 }}
                             >
-                                <span>Meteo </span>{" "}
-                                <span>Algerie</span>
-                                {/*<span><Image src={logo} alt='logo' className='h-[3rem] w-auto'/></span>*/}
+
+                               <span className='inline-flex items-center justify-center '>
+                                   <span>Meteo</span>
+                                   <span><Image src={logo} alt='logo' className='h-[3rem]  px-4 w-auto'/></span>
+                                   {" "}
+                                   <span className=''>Algerie</span>
+                               </span>
+
+
                             </h1>
 
                             <div
