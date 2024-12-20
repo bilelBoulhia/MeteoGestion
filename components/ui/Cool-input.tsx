@@ -5,6 +5,7 @@
 import * as React from "react";
 
 import {IconType} from "react-icons";
+import {cn} from "@/lib/utils";
 
 
 
@@ -17,29 +18,31 @@ export interface InputProps
 const FadeBlurInput = React.forwardRef<HTMLInputElement, InputProps>(
     ({ className, type,Icon, ...props }, ref) => {
         return (
-         <div className="relative inline-flex w-full">
-                    <input
-                        type="text"
+            <div className="relative inline-flex w-full">
+                <input
+                    type="text"
+                    className={cn(
+                        className,
+                        'w-full p-2 pr-12 pl-5 placeholder:text-white bg-blue-400 rounded-full focus:outline-none '
+                    )}
+                    ref={ref}
+                    {...props}
+                />
 
-                        className='w-full p-2 pr-12 pl-5 text-gray-100 bg-slate-800   rounded-full focus:outline-none'
-                        ref={ref}
-                        {...props}
-                    />
-                    <span
+                <span
 
-                        className='absolute right-0 top-0 bottom-0 flex items-center justify-center w-10 p-1 text-white rounded-full focus:outline-none  bg-white/20 '
+                    className='absolute right-0 top-0 bottom-0 flex items-center justify-center w-10 p-1 text-white rounded-full focus:outline-none  bg-white/20 '
 
-                    >
-                        <Icon size={16} className="backdrop-blur-sm " />
+                >
+                        <Icon size={16} className="backdrop-blur-sm "/>
 
                     </span>
 
 
+            </div>
 
-                </div>
 
-
-    );
+        );
     });
 
 export default FadeBlurInput;

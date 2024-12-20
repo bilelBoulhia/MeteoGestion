@@ -5,8 +5,8 @@
 @layer base {
   :root {
     --foreground: 0 0% 98%;
-    --background-start: 210 100% 4%;
-    --background-end: 0 100% 0%;
+    --background-start: 0 0% 100%; /* White */
+    --background-end: 0 0% 100%;
     --navbar-background-start: 210 100% 4%;
     --navbar-background-end: 210 100% 5%;
     --card: 0 0% 3.9%;
