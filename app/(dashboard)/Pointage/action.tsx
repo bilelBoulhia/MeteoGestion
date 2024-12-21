@@ -1,9 +1,12 @@
+'use server'
+
 import {fetchData} from "@/app/api/actions";
-import PointagePage from "@/app/(dashboard)/Pointage/page";
+import PointageTable from "@/app/(dashboard)/Pointage/Table";
 
-async  function getPointageAction(){
-    const data = await fetchData('Pointage/GetPointageThisMonth');
+export async  function Pointage(){
+    const data = await fetchData('Pointage/GetAllPointage');
 
-    return <PointagePage  posts={data}/>;
+    if(data === null) return null;
+    return <PointageTable  data={data}/>;
 
 }

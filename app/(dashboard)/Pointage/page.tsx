@@ -1,34 +1,21 @@
-'use client'
+import {Pointage} from "@/app/(dashboard)/Pointage/action";
 
-
-import {fetchData} from "@/app/api/actions";
-
-import { useQuery } from '@tanstack/react-query'
-
-type propType = {
+export type propType = {
     data : any[]
 }
 
-export default  function PointagePage(props:propType) {
+export default  function Page() {
 
-    const { data } = useQuery(
-        ['pointage'],
-        {
-            queryFn: () => fetchData('Pointage/GetPointageThisMonth'),
-            initialData: props.data, // optional initial data
-        }
-    );
+   return(
+       <div className='w-full h-full rounded-tl-2xl '>
+           <div className='w-full h-full'>
+               <h1 className='p-5'>tableu de pointage annual :</h1>
+               <Pointage/>
+           </div>
 
+       </div>
 
-
-
-
-    return (
-
-         <div>
-               <pre>{JSON.stringify(data)}</pre>
-         </div>
-    );
+   )
 }
 
 

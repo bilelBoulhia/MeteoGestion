@@ -4,7 +4,8 @@
 
 @layer base {
   :root {
-    --foreground: 0 0% 98%;
+    --foreground: 0 0% 30%;
+
     --background-start: 0 0% 100%; /* White */
     --background-end: 0 0% 100%;
     --navbar-background-start: 210 100% 4%;
