@@ -14,6 +14,7 @@ const config = {
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
+    'node_modules/preline/dist/*.js',
   ],
   prefix: "",
   theme: {
@@ -83,6 +84,7 @@ const config = {
   },
   plugins: [
     addVariablesForColors,
+    require('preline/plugin'),
     require("tailwindcss-animate"),
     function ({ matchUtilities, theme }: any) {
       matchUtilities(

@@ -11,7 +11,7 @@ const customStyles = {
         style: {
             width: "100%",
             backgroundColor: 'transparent',
-            borderTopLeftRadius: '1rem',
+
             color: 'white',
         },
     },
@@ -80,7 +80,7 @@ const expandableRow = (row: { rows: PointageType[] }) => (
     <div style={{  background: '#f5f5f5' }}>
         <DataTable
             columns={[
-                { name: 'Date', selector: (row) => row.date.toString(), sortable: true },
+                { name: 'Date', selector: (row) => new Date(row.date).toDateString(), sortable: true },
                 { name: 'ID Employee(details)', selector: (row) => row.employeId, sortable: true },
                 { name: 'Debut Matinee', selector: (row) => row.debutMatinee || '', sortable: true },
                 { name: 'Fin Matinee', selector: (row) => row.finMatinee || '', sortable: true },
@@ -104,7 +104,7 @@ export default function PointageTable(props: propType) {
         }
     );
 
-    // Group data by month
+
     const groupedData = groupByMonth(data);
 
     return (
@@ -112,11 +112,9 @@ export default function PointageTable(props: propType) {
             <DataTable
                 columns={columns}
                 noTableHead
-
                 data={groupedData}
                 customStyles={customStyles}
                 expandableRows
-                expandableRowExpanded={(row) => row.rows.length > 0}
                 expandableRowsComponent={({ data }) => expandableRow(data)}
             />
         </div>
