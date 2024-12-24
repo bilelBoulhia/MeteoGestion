@@ -2,12 +2,14 @@
 
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
 
-import {IconArrowLeft, IconSettings, IconUserBolt} from "@tabler/icons-react";
+import {IconArrowLeft, IconPigMoney, IconServicemark, IconSettings, IconUserBolt} from "@tabler/icons-react";
 import { useState} from "react";
 import {cn} from "@/utils/cn";
 import {signOutAction} from "@/app/actions";
 import {SubmitButton} from "@/components/submit-button";
 import Providers from "@/app/providers";
+
+import {BanknoteIcon, Files, WorkflowIcon} from "lucide-react";
 
 
 
@@ -31,17 +33,24 @@ export default function RootLayout({
       ),
     },
     {
-      label: "RS",
-      href: "/RS",
+      label: "Service Personnal",
+      href: "/ServicePersonnal",
       icon: (
-          <IconUserBolt className="text-neutral-800 h-5 w-5 flex-shrink-0" />
+          <WorkflowIcon className="text-neutral-800 h-5 w-5 flex-shrink-0" />
       ),
     },
     {
-      label: "Settings",
-      href: "#",
+      label: "Les Documents",
+      href: "/Documents",
       icon: (
-          <IconSettings className="text-neutral-800 h-5 w-5 flex-shrink-0" />
+          <Files className="text-neutral-800 h-5 w-5 flex-shrink-0" />
+      ),
+    },
+    {
+      label: "Management de salaire",
+      href: "/Salaire",
+      icon: (
+          <BanknoteIcon className="text-neutral-800 h-5 w-5 flex-shrink-0" />
       ),
     },
 
@@ -86,9 +95,9 @@ const Dashboard = ({
   children: React.ReactNode;
 }) => {
   return (
-      <div className="flex  flex-1">
+      <div className="flex relative min-h-full overflow-hidden flex-1">
         <div className=" rounded-tl-2xl  border  border-black  flex flex-col gap-2 flex-1 w-full h-full">
-          <div className="flex gap-2">
+          <div className="flex  gap-2">
             <Providers>{children}</Providers>
           </div>
         </div>

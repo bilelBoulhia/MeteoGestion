@@ -1,10 +1,10 @@
 'use server'
 
 import {fetchData} from "@/app/api/actions";
-import PointageTable from "@/app/(dashboard)/Pointage/PointageTable";
-import PointageFormView from "@/app/(dashboard)/Pointage/PointageForm";
+import PointageTable from "@/app/(dashboard)/Pointage/Components/PointageTable";
 
-export async  function Pointage(){
+
+export default async  function Pointage(){
     const data = await fetchData('Pointage/GetAllPointage');
 
     if(data === null) return null;
@@ -12,10 +12,3 @@ export async  function Pointage(){
 
 }
 
-export async  function PointageForm(){
-    const data = await fetchData('Employe/GetAllEmployes');
-
-    if(data === null) return null;
-    return <PointageFormView  data={data}/>;
-
-}

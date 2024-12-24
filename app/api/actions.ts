@@ -1,8 +1,9 @@
 export async function fetchData(endpoint: string): Promise<any[]> {
   try{
-      const response = await fetch(`https://localhost:44376/api/${endpoint}`);
+      const response = await fetch(`http://localhost:5007/api/${endpoint}`);
       if (!response.ok) {
           console.error(`Failed to fetch data: ${response.statusText}`);
+          return [];
       }
       return  response.json() ;
   }catch(e){
@@ -12,7 +13,7 @@ export async function fetchData(endpoint: string): Promise<any[]> {
 }
 export async function postData(endpoint: string, data:  string ): Promise<any> {
     try {
-        const response = await fetch(`https://localhost:44376/api/${endpoint}`, {
+        const response = await fetch(`http://localhost:5007/api/${endpoint}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -33,4 +34,21 @@ export async function postData(endpoint: string, data:  string ): Promise<any> {
     }
 }
 
+export async function DeleteData(endpoint: string,key:any) {
+    const response = await fetch(`http://localhost:5007/api/${endpoint}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(key),
 
+    });
+
+    if (!response.ok) {
+        const responseBody = await response.text();
+        console.error(`Failed to Delete data: ${response.status} - ${responseBody}`);
+        return null;
+    }
+
+    return response;
+}
