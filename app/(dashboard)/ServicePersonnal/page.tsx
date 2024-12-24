@@ -9,12 +9,13 @@ import GrilleSalaireForm from "@/app/(dashboard)/ServicePersonnal/Components/Gri
 export default  function Page() {
 
     return(
-        <div className="flex flex-col relative   text-center overflow-scroll   w-full ">
-            <Tabs className='mt-5 ' defaultValue="ajouter">
+        <div className="flex flex-col relative    text-center   w-full ">
+            <Tabs className='mt-5' defaultValue="ajouter">
                 <TabsList>
                     <TabsTrigger value="List">List des employees</TabsTrigger>
                     <TabsTrigger value="ajouter">ajouter employee</TabsTrigger>
                     <TabsTrigger value="grille">ajouter grille de salaire</TabsTrigger>
+
 
                 </TabsList>
                 <TabsContent value="List">

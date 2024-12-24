@@ -4,7 +4,7 @@ import { propType } from "@/app/(dashboard)/Pointage/page";
 import {QueryClient, useQuery, useQueryClient} from "@tanstack/react-query";
 import {DeleteData, fetchData} from "@/app/api/actions";
 import DataTable from 'react-data-table-component';
-import React from "react";
+import React, {useEffect} from "react";
 
 import {
     AlertDialog, AlertDialogAction, AlertDialogCancel,
@@ -15,7 +15,7 @@ import {
     AlertDialogTrigger
 } from "@/components/ui/alert-dialog";
 import {TrashIcon} from "lucide-react";
-import {Button} from "@/components/ui/button";
+
 
 
 
@@ -71,13 +71,13 @@ const customStyles = {
 
 
 
-const handleDelete = async (nss: string,Q:QueryClient) => {
+const handleDelete = async (faid: string,Q:QueryClient) => {
 
     try {
-        await DeleteData('Employe/DeleteEmploye/',nss);
-        await Q.invalidateQueries(['emp']);
+        await DeleteData('Document/DeleteFicheAttachemnt',faid);
+        await Q.invalidateQueries(['fiche']);
     } catch (error) {
-        console.error('Error deleting employee:', error);
+        console.error('Error deleting FicheAttachemnt:', error);
     }
 };
 
@@ -86,17 +86,20 @@ const handleDelete = async (nss: string,Q:QueryClient) => {
 
 
 
-export default function EmployeeTable(props: propType) {
+export default function FATable(props: propType) {
     const queryClient = useQueryClient();
     const columns =
         [
-            { name: 'nss', selector: (row:any) => row.nss, sortable: true },
-            { name: ' Nom', selector: (row:any) => row.nom, sortable: true },
-            { name: 'Prenom', selector: (row:any) => row.prenom , sortable: true },
-            { name: 'Grade', selector: (row:any) => row.grade , sortable: true },
-            { name: 'NombreEnfants', selector: (row:any) => row.nombreEnfants , sortable: true },
-            { name: 'Section', selector: (row:any) => row.section, sortable: true },
-            { name: 'DateRecrutement', selector: (row:any) => new Date(row.dateRecrutement).toDateString() , sortable: true },
+            { name: 'fich id', selector: (row:any) => row.faID, sortable: true },
+            { name: 'nom et prenom', selector: (row:any) => row.nomEtPrenom, sortable: true },
+            { name: 'employeeID', selector: (row:any) => row.employeeID , sortable: true },
+            { name: 'jour Travaillee', selector: (row:any) => row.jourTravaillee , sortable: true },
+            { name: 'remboursement', selector: (row:any) => row.remboursement , sortable: true },
+            { name: 'pri', selector: (row:any) => row.pri, sortable: true },
+            { name: 'prc', selector: (row:any) => row.prc , sortable: true },
+            { name: 'year', selector: (row:any) => new Date(row.year).toDateString() , sortable: true },
+            { name: 'month', selector: (row:any) => new Date(row.month).toDateString() , sortable: true },
+
             {
                 name: '',
                 cell: (row: any) => (
@@ -107,15 +110,14 @@ export default function EmployeeTable(props: propType) {
                             </AlertDialogTrigger>
                             <AlertDialogContent className='rounded-2xl bg-white  '>
                                 <AlertDialogHeader className='bg-white rounded-2xl '>
-                                    <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                                    <AlertDialogTitle>Vous etes sure?</AlertDialogTitle>
                                     <AlertDialogDescription>
-                                        This action cannot be undone. This will permanently delete your account
-                                        and remove your data from our servers.
+                                        tu est enterant de supprimer
                                     </AlertDialogDescription>
                                 </AlertDialogHeader>
                                 <AlertDialogFooter>
                                     <AlertDialogCancel className='rounded-xl '>Cancel</AlertDialogCancel>
-                                    <AlertDialogAction  onClick={() => handleDelete(row.nss,queryClient)}  className='rounded-xl bg-blue-400 text-white hover:bg-blue-800 '>Continue</AlertDialogAction>
+                                    <AlertDialogAction  onClick={() => handleDelete(row.faID,queryClient)}  className='rounded-xl bg-blue-400 text-white hover:bg-blue-800 '>Continue</AlertDialogAction>
                                 </AlertDialogFooter>
                             </AlertDialogContent>
                         </AlertDialog>
@@ -131,9 +133,9 @@ export default function EmployeeTable(props: propType) {
         ];
 
     const { data } = useQuery(
-        ['emp'],
+        ['fiche'],
         {
-            queryFn: () => fetchData('Employe/GetAllEmployes'),
+            queryFn: () => fetchData('Document/GetAllEmployeFA'),
             initialData: props.data,
         }
     );
@@ -150,6 +152,7 @@ export default function EmployeeTable(props: propType) {
                 noHeader
                 customStyles={customStyles}
             />
+
         </div>
     );
 }

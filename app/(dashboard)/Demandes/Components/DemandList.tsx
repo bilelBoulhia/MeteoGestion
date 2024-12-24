@@ -15,7 +15,7 @@ import {
     AlertDialogTrigger
 } from "@/components/ui/alert-dialog";
 import {TrashIcon} from "lucide-react";
-import {Button} from "@/components/ui/button";
+
 
 
 
@@ -24,37 +24,45 @@ const customStyles = {
         style: {
             width: "100%",
             backgroundColor: 'transparent',
-
+            overflow:'hidden',
             color: 'white',
+
+
         },
     },
     rows: {
         style: {
-            backgroundColor: 'white',
+            backgroundColor: 'black',
             minHeight: '72px',
-            textColor: 'white',
-            margin:'5px',
-            padding: '7px',
+            padding: '2px',
+
+
         },
     },
     headRow: {
         style: {
             backgroundColor: 'black',
-            borderRadius:'10rem',
-            margin:'5px',
-            padding: '2px',
-            color: 'white',
+            borderTopLeftRadius:' 7px',
+            borderTopRightRadius:' 7px',
+            padding: '5px',
+
+            color: 'black',
         },
     },
+
     headCells: {
         style: {
             paddingLeft: '8px',
             paddingRight: '8px',
+            borderRadius:'0.5rem',
+            margin:'5px',
+            fontWeight: 'bold',
+            backgroundColor:'white'
         },
     },
     cells: {
         style: {
-            backgroundColor: 'transparent',
+            color: 'white',
             paddingLeft: '8px',
             paddingRight: '8px',
         },
@@ -63,10 +71,11 @@ const customStyles = {
 
 
 
-const handleDelete = async (nss: string,Q:QueryClient) => {
+
+const handleDelete = async (id: string,Q:QueryClient) => {
 
     try {
-        await DeleteData('Employe/DeleteEmploye/',nss);
+        await DeleteData('Document/DeleteLettreAccompagnee',id);
         await Q.invalidateQueries(['emp']);
     } catch (error) {
         console.error('Error deleting employee:', error);
@@ -78,17 +87,18 @@ const handleDelete = async (nss: string,Q:QueryClient) => {
 
 
 
-export default function EmployeeTable(props: propType) {
+export default function DemandTable(props: propType) {
     const queryClient = useQueryClient();
     const columns =
         [
-            { name: 'nss', selector: (row:any) => row.nss, sortable: true },
-            { name: ' Nom', selector: (row:any) => row.nom, sortable: true },
-            { name: 'Prenom', selector: (row:any) => row.prenom , sortable: true },
-            { name: 'Grade', selector: (row:any) => row.grade , sortable: true },
-            { name: 'NombreEnfants', selector: (row:any) => row.nombreEnfants , sortable: true },
-            { name: 'Section', selector: (row:any) => row.section, sortable: true },
-            { name: 'DateRecrutement', selector: (row:any) => new Date(row.dateRecrutement).toDateString() , sortable: true },
+            { name: 'demandeId', selector: (row:any) => row.demandeId, sortable: true },
+            { name: 'employeId', selector: (row:any) => row.employeId, sortable: true },
+            { name: 'type de Changement', selector: (row:any) => row.typeChangement , sortable: true },
+            { name: 'raison', selector: (row:any) => row.raison , sortable: true },
+            { name: 'commentaires', selector: (row:any) => row.commentaires , sortable: true },
+            { name: 'status', selector: (row:any) => row.statut , sortable: true },
+            {name: 'date de Demande', selector: (row: any) => new Date(row.dateDemande).toLocaleDateString(), sortable: true
+            },
             {
                 name: '',
                 cell: (row: any) => (
@@ -107,7 +117,7 @@ export default function EmployeeTable(props: propType) {
                                 </AlertDialogHeader>
                                 <AlertDialogFooter>
                                     <AlertDialogCancel className='rounded-xl '>Cancel</AlertDialogCancel>
-                                    <AlertDialogAction  onClick={() => handleDelete(row.nss,queryClient)}  className='rounded-xl bg-blue-400 text-white hover:bg-blue-800 '>Continue</AlertDialogAction>
+                                    <AlertDialogAction  onClick={() => handleDelete(row.demandeId,queryClient)}  className='rounded-xl bg-blue-400 text-white hover:bg-blue-800 '>Continue</AlertDialogAction>
                                 </AlertDialogFooter>
                             </AlertDialogContent>
                         </AlertDialog>
@@ -123,12 +133,13 @@ export default function EmployeeTable(props: propType) {
         ];
 
     const { data } = useQuery(
-        ['emp'],
+        ['demand'],
         {
-            queryFn: () => fetchData('Employe/GetAllEmployes'),
+            queryFn: () => fetchData('Document/GetAllEmployeDemands'),
             initialData: props.data,
         }
     );
+
 
 
 

@@ -117,7 +117,7 @@ export default function EmployeeForm() {
     })
 
     return (
-        <div className="min-h-screen bg-white p-8">
+        <div className="min-h-screen  bg-white p-8">
             <form onSubmit={onSubmit} className="max-w-4xl mx-auto space-y-8 bg-white shadow-lg rounded-[0.5rem] p-8 border border-gray-200">
                 <h1 className="text-3xl font-bold text-center text-gray-900 mb-8">Employee Form</h1>
 

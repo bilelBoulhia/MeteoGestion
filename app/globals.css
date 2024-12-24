@@ -41,7 +41,7 @@
   * {
     @apply border-border;
     scroll-behavior: smooth;
-    overflow: auto;
+
   }
 
 
@@ -50,6 +50,8 @@
     @apply text-foreground;
     background-image: linear-gradient(to bottom, hsl(var(--background-start)), hsl(var(--background-end)));
     min-height: 100vh;
+
+
   }
 
 

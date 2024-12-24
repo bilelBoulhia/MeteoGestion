@@ -1,6 +1,5 @@
 'use client'
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import {
     Select,
@@ -24,59 +23,72 @@ import {MonthYearPicker} from "@/components/ui/components_month-year-picker";
 import Toast from "@/components/ui/toast";
 
 
-interface GrilleSalaire {
+interface BulletinData {
     NSS_EMPLOYE: string;
-    Grd:string;
-    BaseSalary: number;
+    Month: number;
+    Year: number;
 
 }
 
 const schema = yup.object({
     NSS_EMPLOYE: yup.string().required("Employee est obligatoire"),
-    Grd: yup.string().required("grade est obligatoire"),
-    BaseSalary: yup.number().required("salaire de base est obligatoire"),
+    Month: yup.number().required("moins est obligatoire").min(1).max(12),
+    Year: yup.number().required("l'anne est obligatoire").min(1900).max(2100),
 
 }).required();
 
-export default function GrilleSalaireForm() {
+export default function BulletinSalaireForm() {
     const {
         handleSubmit,
         reset,
         control,
         setValue,
         formState: { errors },
-    } = useForm<GrilleSalaire>({
+    } = useForm<BulletinData>({
         resolver: yupResolver(schema),
         defaultValues: {
             NSS_EMPLOYE: '',
-            BaseSalary: 0,
-            Grd: '',
+            Month: Number(new Date().getMonth()),
+            Year: Number(new Date().getFullYear()),
 
         }
     })
+
     const { data: empData } = useQuery(
         ['emp'],
         {
             queryFn: () => fetchData('Employe/GetAllEmployes'),
         }
     );
+
     const [selectedEmployee, setSelectedEmployee] = useState<string>('')
+    const [selectedMonth, setSelectedMonth] = useState('')
+    const [selectedYear, setSelectedYear] = useState('')
+
     useEffect(() => {
         setValue('NSS_EMPLOYE', selectedEmployee);
     }, [selectedEmployee, setValue]);
 
-
+    useEffect(() => {
+        if (selectedMonth) {
+            setValue('Month', parseInt(selectedMonth));
+        }
+        if (selectedYear) {
+            setValue('Year', parseInt(selectedYear));
+        }
+    }, [selectedMonth, selectedYear, setValue]);
 
     const mutation = useMutation({
-        mutationFn: async (data: GrilleSalaire) => {
+        mutationFn: async (data: BulletinData) => {
             const formattedData = {
                 NSS_EMPLOYE: data.NSS_EMPLOYE,
-                Grd: data.Grd,
-                BaseSalary: data.BaseSalary,
+                Month: data.Month,
+                Year: data.Year,
+
 
             };
             const res = await axios.post(
-                'http://localhost:5007/api/Employe/CreateGrilleSalaire',
+                'http://localhost:5007/api/Salary/CreateBulletinSalaire',
                 formattedData,
                 {
                     headers: {
@@ -91,22 +103,29 @@ export default function GrilleSalaireForm() {
     const onSubmit = handleSubmit((data) => {
         mutation.mutate(data, {
             onSuccess: () => {
+                console.log(data)
                 reset();
                 setSelectedEmployee('');
-                },
+                setSelectedMonth('');
+                setSelectedYear('');
+            },
             onError: (error) => {
                 console.error("Submission error:", error);
             },
         })
     })
 
+    const handleMonthYearChange = (month: string, year: string) => {
+        setSelectedMonth(month)
+        setSelectedYear(year)
+    }
 
     return (
-        <div className="min-h-screen  py-12 px-4 sm:px-6 lg:px-8">
+        <div className="  py-12 px-4 sm:px-6 lg:px-8">
             <form onSubmit={onSubmit} className="max-w-3xl mx-auto space-y-8 bg-white shadow-lg rounded-xl p-8 border border-gray-200">
                 <div className="border-b border-gray-200 pb-6">
                     <h1 className="text-3xl font-bold text-gray-900 text-center">
-                        Grille salaire
+                       Bulletin salairee
                     </h1>
                 </div>
 
@@ -142,52 +161,10 @@ export default function GrilleSalaireForm() {
                         )}
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2 p-1">
-                            <Label htmlFor="BaseSalary" className="font-medium">Base Salarier</Label>
-                            <Controller
-                                name="BaseSalary"
-                                control={control}
-                                render={({field}) => (
-                                    <Input
-                                        id="BaseSalary"
-                                        type="number"
-                                        step="0.01"
-                                        placeholder="Enter le Salaire de base"
-                                        {...field}
-                                        onChange={(e) => field.onChange(parseFloat(e.target.value))}
-                                    />
-                                )}
-                            />
-                            {errors.BaseSalary && (
-                                <p className="text-red-500 text-sm mt-1">{errors.BaseSalary.message}</p>
-                            )}
-                        </div>
 
-                        <div className="space-y-2 p-1">
-                            <Label htmlFor="Grd" className="font-medium">Grade</Label>
-                            <Controller
-                                name="Grd"
-                                control={control}
-                                render={({field}) => (
-                                    <Input
-                                        id="Grd"
-                                        type='text'
-                                        placeholder="Enter le Grade"
-                                        {...field}
-                                        onChange={(e) => field.onChange(e.target.value)}
-                                    />
-                                )}
-                            />
-                            {errors.Grd && (
-                                <p className="text-red-500 text-sm mt-1">{errors.Grd.message}</p>
-                            )}
-                        </div>
-
-
+                    <div className="pt-4 items-center justify-center flex w-full">
+                        <MonthYearPicker onChange={handleMonthYearChange}/>
                     </div>
-
-
 
                     <Button
                         type="submit"
@@ -195,16 +172,16 @@ export default function GrilleSalaireForm() {
                         variant='secondary'
                         disabled={mutation.isLoading}
                     >
-                        {mutation.isLoading ? 'Submitting...' : 'Submit'}
+                        {mutation.isLoading ? 'attend...' : 'Genere'}
                     </Button>
                 </div>
             </form>
 
             {mutation.isError && (
-                <Toast show={true} message="Error dans le server, essayer plus tard,"/>
+                <Toast show={true} message="Erreur dans le server,creer la fiche d'attachement d'abord"/>
             )}
             {mutation.isSuccess && (
-                <Toast show={true} message="Grille de salaire a été ajouté"/>
+                <Toast show={true} message="Bulletin a été generer"/>
             )}
         </div>
     )

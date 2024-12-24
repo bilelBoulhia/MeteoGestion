@@ -13,37 +13,46 @@ const customStyles = {
         style: {
             width: "100%",
             backgroundColor: 'transparent',
-
+            overflow:'hidden',
             color: 'white',
+
+
         },
     },
     rows: {
         style: {
-            backgroundColor: 'white',
+            backgroundColor: 'black',
             minHeight: '72px',
-            textColor: 'white',
-            margin:'5px',
-            padding: '5px',
+            padding: '2px',
+            borderBottomLeftRadius:'7px',
+            borderBottomRightRadius:' 7px',
+
         },
     },
     headRow: {
         style: {
             backgroundColor: 'black',
-            borderRadius:'10rem',
-            margin:'5px',
+            borderTopLeftRadius:' 7px',
+            borderTopRightRadius:' 7px',
             padding: '5px',
-            color: 'white',
+
+            color: 'black',
         },
     },
+
     headCells: {
         style: {
             paddingLeft: '8px',
             paddingRight: '8px',
+            borderRadius:'0.5rem',
+            margin:'5px',
+            fontWeight: 'bold',
+            backgroundColor:'white'
         },
     },
     cells: {
         style: {
-            backgroundColor: 'transparent',
+            color: 'white',
             paddingLeft: '8px',
             paddingRight: '8px',
         },
@@ -92,7 +101,7 @@ export default function PointageTable(props: propType) {
 
 
     return (
-        <div className="w-full h-full flex items-center justify-center flex-col mt-5  gap-[3rem] p-0 m-0">
+        <div className="w-full h-full   flex items-center justify-center flex-col mt-5  gap-[3rem] p-0 m-0">
             <Card className="w-full max-w-md">
                 <CardHeader>
                     <CardTitle className="text-2xl font-bold text-center">Pointage</CardTitle>

@@ -8,7 +8,7 @@ export type propType = {
 export default  function Page() {
 
    return(
-       <div className="flex flex-col relative   text-center overflow-scroll   w-full ">
+       <div className="flex flex-col relative   text-center    w-full ">
            <Tabs className='mt-5 ' defaultValue="List">
                <TabsList>
                    <TabsTrigger value="List">List de pointage</TabsTrigger>

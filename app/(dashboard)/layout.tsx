@@ -10,6 +10,7 @@ import {SubmitButton} from "@/components/submit-button";
 import Providers from "@/app/providers";
 
 import {BanknoteIcon, Files, WorkflowIcon} from "lucide-react";
+import {BiGitPullRequest} from "react-icons/bi";
 
 
 
@@ -37,6 +38,13 @@ export default function RootLayout({
       href: "/ServicePersonnal",
       icon: (
           <WorkflowIcon className="text-neutral-800 h-5 w-5 flex-shrink-0" />
+      ),
+    },
+    {
+      label: "Les Demandes",
+      href: "/Demandes",
+      icon: (
+          <BiGitPullRequest className="text-neutral-800 h-5 w-5 flex-shrink-0" />
       ),
     },
     {
@@ -69,7 +77,7 @@ export default function RootLayout({
       >
         <Sidebar open={open} setOpen={setOpen}>
           <SidebarBody className="justify-between gap-10">
-            <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+            <div className="flex flex-col flex-1  overflow-x-hidden">
 
               <div className="mt-8 flex flex-col gap-2">
                 {links.map((link, idx) => (
@@ -95,8 +103,8 @@ const Dashboard = ({
   children: React.ReactNode;
 }) => {
   return (
-      <div className="flex relative min-h-full overflow-hidden flex-1">
-        <div className=" rounded-tl-2xl  border  border-black  flex flex-col gap-2 flex-1 w-full h-full">
+      <div className="flex relative min-h-full  flex-1">
+        <div className=" rounded-tl-2xl   border  border-black  flex flex-col gap-2 flex-1 w-full h-full">
           <div className="flex  gap-2">
             <Providers>{children}</Providers>
           </div>

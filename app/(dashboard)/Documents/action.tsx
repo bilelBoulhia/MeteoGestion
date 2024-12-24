@@ -2,14 +2,15 @@
 
 import {fetchData} from "@/app/api/actions";
 
-import EmployeeTable from "@/app/(dashboard)/ServicePersonnal/Components/EmployeeList";
+
+import FATable from "@/app/(dashboard)/Documents/Components/FichAttachementList";
 
 
-export default async  function Employee(){
-    const data = await fetchData('Employe/GetAllEmployes');
+export default async  function FichesAtt(){
+    const data = await fetchData('Document/GetAllEmployeFA');
 
-    if(data === null) return null;
-    return <EmployeeTable  data={data}/>;
+
+    return <FATable  data={data}/>;
 
 }
 
