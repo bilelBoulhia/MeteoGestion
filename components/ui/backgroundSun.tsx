@@ -2,7 +2,7 @@ import React from 'react';
 
 const SimpleBackgroundWithSun: React.FC = () => {
     return (
-        <div className="absolute inset-0 w-full h-full overflow-hidden ">
+        <div  className="absolute  inset-0 w-full h-full overflow-hidden ">
             <svg className="absolute top-0 left-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
                 {/* More visible sun */}
                 <circle cx="0" cy="0" r="100" fill="url(#sunGradient)" opacity="0.8">

@@ -2,6 +2,8 @@
 
 import {fetchData} from "@/app/api/actions";
 import PointageTable from "@/app/(dashboard)/Pointage/Components/PointageTable";
+import EmployeeTable from "@/app/(dashboard)/ServicePersonnal/Components/EmployeeList";
+import EmployeePointageTable from "@/app/(dashboard)/Pointage/Components/EmployeePointageTable";
 
 
 export default async  function Pointage(){
@@ -9,6 +11,15 @@ export default async  function Pointage(){
 
     if(data === null) return null;
     return <PointageTable  data={data}/>;
+
+}
+
+export  async  function EmployeePointage(){
+    const data = await fetchData('Employe/GetAllEmployes');
+    const pData = await fetchData('Pointage/GetAllPointageToday');
+
+    if(data === null) return null;
+    return <EmployeePointageTable pData={pData} data={data}/>;
 
 }
 

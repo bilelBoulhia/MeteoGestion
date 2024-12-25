@@ -15,59 +15,12 @@ import {
     AlertDialogTrigger
 } from "@/components/ui/alert-dialog";
 import {TrashIcon} from "lucide-react";
+import {customStyles} from "@/app/(dashboard)/Pointage/Components/PointageTable";
 
 
 
 
-const customStyles = {
-    table: {
-        style: {
-            width: "100%",
-            backgroundColor: 'transparent',
-            overflow:'hidden',
-            color: 'white',
 
-
-        },
-    },
-    rows: {
-        style: {
-            backgroundColor: 'black',
-            minHeight: '72px',
-            padding: '2px',
-
-
-        },
-    },
-    headRow: {
-        style: {
-            backgroundColor: 'black',
-            borderTopLeftRadius:' 7px',
-            borderTopRightRadius:' 7px',
-            padding: '5px',
-
-            color: 'black',
-        },
-    },
-
-    headCells: {
-        style: {
-            paddingLeft: '8px',
-            paddingRight: '8px',
-            borderRadius:'0.5rem',
-            margin:'5px',
-            fontWeight: 'bold',
-            backgroundColor:'white'
-        },
-    },
-    cells: {
-        style: {
-            color: 'white',
-            paddingLeft: '8px',
-            paddingRight: '8px',
-        },
-    },
-};
 
 
 

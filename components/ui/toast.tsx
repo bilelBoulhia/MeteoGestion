@@ -38,7 +38,7 @@ export default function Toast({show, message, className}: ToastProps) {
                     className={cn("fixed inset-x-0 bottom-0 mx-auto mb-4 w-full max-w-sm",className)}
 
                 >
-                    <div className="bg-gradient-to-r m-2 from-purple-600 to-violet-600 rounded-lg shadow-lg overflow-hidden">
+                    <div className=" m-2 bg-teal-600 rounded-xl shadow-lg overflow-hidden">
                         <div className="p-4 flex items-center justify-between">
                             <p className="text-white font-medium">{message}</p>
                             <button

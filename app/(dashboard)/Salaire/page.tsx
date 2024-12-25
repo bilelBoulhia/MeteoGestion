@@ -4,6 +4,8 @@ import EmployeeForm from "@/app/(dashboard)/ServicePersonnal/Components/Employee
 import Employee from "@/app/(dashboard)/ServicePersonnal/action";
 import GrilleSalaireForm from "@/app/(dashboard)/ServicePersonnal/Components/GrilleSalaireForm";
 import BulletinSalaireForm from "@/app/(dashboard)/Salaire/Components/BulletinSalaireForm";
+import BillSailareList from "@/app/(dashboard)/Salaire/Components/BillSailareList";
+import Bulletin from "@/app/(dashboard)/Salaire/action";
 
 
 
@@ -18,6 +20,7 @@ export default  function Page() {
 
                 </TabsList>
                 <TabsContent value="List">
+                    <Bulletin/>
                 </TabsContent>
                 <TabsContent value="ajouter">
                     <BulletinSalaireForm/>

@@ -16,58 +16,11 @@ import {
 } from "@/components/ui/alert-dialog";
 import {TrashIcon} from "lucide-react";
 import {Button} from "@/components/ui/button";
+import {customStyles} from "@/app/(dashboard)/Pointage/Components/PointageTable";
+import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/Card";
 
 
 
-const customStyles = {
-    table: {
-        style: {
-            width: "100%",
-            backgroundColor: 'transparent',
-            overflow:'hidden',
-            color: 'white',
-
-
-        },
-    },
-    rows: {
-        style: {
-            backgroundColor: 'black',
-            minHeight: '72px',
-            padding: '2px',
-
-
-        },
-    },
-    headRow: {
-        style: {
-            backgroundColor: 'black',
-            borderTopLeftRadius:' 7px',
-            borderTopRightRadius:' 7px',
-            padding: '5px',
-
-            color: 'black',
-        },
-    },
-
-    headCells: {
-        style: {
-            paddingLeft: '8px',
-            paddingRight: '8px',
-            borderRadius:'0.5rem',
-            margin:'5px',
-            fontWeight: 'bold',
-            backgroundColor:'white'
-        },
-    },
-    cells: {
-        style: {
-            color: 'white',
-            paddingLeft: '8px',
-            paddingRight: '8px',
-        },
-    },
-};
 
 
 
@@ -109,8 +62,7 @@ export default function EmployeeTable(props: propType) {
                                 <AlertDialogHeader className='bg-white rounded-2xl '>
                                     <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                                     <AlertDialogDescription>
-                                        This action cannot be undone. This will permanently delete your account
-                                        and remove your data from our servers.
+                                        vous êtes sur le point de supprimer des données
                                     </AlertDialogDescription>
                                 </AlertDialogHeader>
                                 <AlertDialogFooter>
@@ -143,7 +95,7 @@ export default function EmployeeTable(props: propType) {
 
 
     return (
-        <div className="w-full h-full flex items-center justify-center flex-col mt-5 p-0 m-0">
+        <div className="w-full h-full flex items-center  justify-center flex-col mt-[5rem] p-0 m-0">
             <DataTable
                 columns={columns}
                 data={data}

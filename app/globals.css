@@ -44,7 +44,13 @@
 
   }
 
+  button[type='submit'] {
+    background-color: #082f49;
+  }
 
+  nextjs-portal {
+    display: none;
+  }
 
   body {
     @apply text-foreground;

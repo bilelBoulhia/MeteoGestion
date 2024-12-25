@@ -5,7 +5,7 @@ import { Calendar } from 'lucide-react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Card, CardContent, CardHeader } from '@/components/ui/Card'
 
-// Add month number mapping
+
 const months = [
   { name: 'January', number: '1' },
   { name: 'February', number: '2' },
@@ -39,46 +39,52 @@ export function MonthYearPicker({ onChange }: MonthYearPickerProps) {
   }, [selectedMonth, year, onChange])
 
   return (
-      <Card className="w-[300px]">
-        <CardHeader className="flex text-center w-full flex-row items-center justify-center space-y-0 gap-4">
-          <Calendar className="h-4 w-4 text-muted-foreground"/>
-          <span className="text-lg font-semibold">{selectedMonth.name}</span>
+      <div
+          className="w-full p-2 inline-flex gap-4 text-black rounded-[0.5rem] flex-row justify-between  items-center ">
+
+        <div className='inline-flex items-center justify-center gap-4'>
+          <Calendar className="h-4 w-4  text-muted-foreground"/>
+          <span className="text-lg  font-semibold">{selectedMonth.name}</span>
+          {'-'}
           <span className="text-lg font-semibold">{year}</span>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-2 gap-4">
-            <Select
-                value={selectedMonth.name}
-                onValueChange={(value) => {
-                  const month = months.find(m => m.name === value)
-                  if (month) setSelectedMonth(month)
-                }}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Month" />
-              </SelectTrigger>
-              <SelectContent>
-                {months.map((m) => (
-                    <SelectItem key={m.number} value={m.name}>
-                      {m.name}
-                    </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <Select value={year} onValueChange={setYear}>
-              <SelectTrigger>
-                <SelectValue placeholder="Year" />
-              </SelectTrigger>
-              <SelectContent>
-                {years.map((y) => (
-                    <SelectItem key={y} value={y.toString()}>
-                      {y}
-                    </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-        </CardContent>
-      </Card>
+        </div>
+
+        <div className="grid grid-cols-2 text-white gap-4">
+          <Select
+              value={selectedMonth.name}
+              onValueChange={(value) => {
+                const month = months.find(m => m.name === value)
+                if (month) setSelectedMonth(month)
+              }}
+          >
+            <SelectTrigger className='bg-sky-950'>
+              <SelectValue placeholder="Month"/>
+            </SelectTrigger>
+            <SelectContent>
+              {months.map((m) => (
+                  <SelectItem key={m.number} value={m.name}>
+                    {m.name}
+                  </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Select value={year} onValueChange={setYear}>
+            <SelectTrigger className='bg-sky-950'>
+              <SelectValue placeholder="Year"/>
+            </SelectTrigger>
+            <SelectContent>
+              {years.map((y) => (
+                  <SelectItem key={y} value={y.toString()}>
+                    {y}
+                  </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
   )
 }
+
+/*
+*
+* */

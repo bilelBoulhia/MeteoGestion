@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
-import { Calendar } from "@/components/ui/calendar"
+
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { CalendarIcon, PlusIcon, XIcon } from 'lucide-react'
 import { format } from "date-fns"
@@ -15,6 +15,7 @@ import { useForm, Controller } from "react-hook-form"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 import Toast from '@/components/ui/toast'
+import {DatePicker} from "@nextui-org/date-picker";
 
 const schema = yup.object({
     NSS: yup.string().required("NSS is required"),
@@ -53,6 +54,18 @@ const schema = yup.object({
 
 export default function EmployeeForm() {
     const [responsabilites, setResponsabilites] = useState<string[]>([])
+
+
+    const respMap=[
+        {value:'1',text:'Responsable de poste'},
+        {value:'2',text:'Responsable de formation'},
+        {value:'3',text:'chef service'},
+        {value:'4',text:'Chef de project'},
+        {value:'5',text:'Chef de deparetement'},
+        {value:'6',text:'CResponsable de la relation exterieure'},
+        {value:'7',text:'President de commission des oeuvres sociales'}
+    ]
+
     const [newResponsabilite, setNewResponsabilite] = useState('')
 
     const {
@@ -116,8 +129,9 @@ export default function EmployeeForm() {
         })
     })
 
+
     return (
-        <div className="min-h-screen  bg-white p-8">
+        <div className="min-h-screen  p-8">
             <form onSubmit={onSubmit} className="max-w-4xl mx-auto space-y-8 bg-white shadow-lg rounded-[0.5rem] p-8 border border-gray-200">
                 <h1 className="text-3xl font-bold text-center text-gray-900 mb-8">Employee Form</h1>
 
@@ -127,7 +141,7 @@ export default function EmployeeForm() {
                         <Controller
                             name="NSS"
                             control={control}
-                            render={({ field }) => (
+                            render={({field}) => (
                                 <Input id="NSS" placeholder="Enter NSS" {...field} />
                             )}
                         />
@@ -139,7 +153,7 @@ export default function EmployeeForm() {
                         <Controller
                             name="Nom"
                             control={control}
-                            render={({ field }) => (
+                            render={({field}) => (
                                 <Input id="Nom" placeholder="Enter nom" {...field} />
                             )}
                         />
@@ -151,7 +165,7 @@ export default function EmployeeForm() {
                         <Controller
                             name="Prenom"
                             control={control}
-                            render={({ field }) => (
+                            render={({field}) => (
                                 <Input id="Prenom" placeholder="Enter prénom" {...field} />
                             )}
                         />
@@ -163,48 +177,32 @@ export default function EmployeeForm() {
                         <Controller
                             name="DateNaissance"
                             control={control}
-                            render={({ field }) => (
-                                <Popover>
-                                    <PopoverTrigger asChild>
-                                        <Button variant="outline" className="w-full rounded-[0.5rem] justify-start text-left font-normal">
-                                            <CalendarIcon className="mr-2 h-4 w-4" />
-                                            {field.value ? format(field.value, "PPP") : <span>Pick a date</span>}
-                                        </Button>
-                                    </PopoverTrigger>
-                                    <PopoverContent className="w-auto p-0">
-                                        <Calendar
-                                            mode="single"
-                                            selected={field.value}
-                                            onSelect={field.onChange}
-                                        />
-                                    </PopoverContent>
-                                </Popover>
+                            render={({field}) => (
+
+                                <DatePicker
+                                    aria-label="Pick a date"
+                                    // @ts-ignore
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    placeholder="Pick a date"
+                                    isClearable
+
+                                />
                             )}
                         />
                         {errors.DateNaissance && <p className="text-red-500 text-sm">{errors.DateNaissance.message}</p>}
                     </div>
 
-                    <div className="space-y-2 p-1">
-                        <Label htmlFor="LieuNaissance">Lieu de Naissance</Label>
-                        <Controller
-                            name="LieuNaissance"
-                            control={control}
-                            render={({ field }) => (
-                                <Input id="LieuNaissance" placeholder="Enter lieu de naissance" {...field} />
-                            )}
-                        />
-                        {errors.LieuNaissance && <p className="text-red-500 text-sm">{errors.LieuNaissance.message}</p>}
-                    </div>
 
                     <div className="space-y-2 p-1">
                         <Label htmlFor="Sexe">Sexe</Label>
                         <Controller
                             name="Sexe"
                             control={control}
-                            render={({ field }) => (
+                            render={({field}) => (
                                 <Select onValueChange={field.onChange} value={field.value?.toString()}>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select sexe" />
+                                    <SelectTrigger className='border-neutral-300 shadow-lg'>
+                                        <SelectValue placeholder="Select sexe"/>
                                     </SelectTrigger>
                                     <SelectContent>
                                         <SelectItem value="0">Masculin</SelectItem>
@@ -221,10 +219,10 @@ export default function EmployeeForm() {
                         <Controller
                             name="SituationFamiliale"
                             control={control}
-                            render={({ field }) => (
+                            render={({field}) => (
                                 <Select onValueChange={field.onChange} value={field.value?.toString()}>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select situation" />
+                                    <SelectTrigger className='border-neutral-300 shadow-lg'>
+                                        <SelectValue placeholder="Select situation"/>
                                     </SelectTrigger>
                                     <SelectContent>
                                         <SelectItem value="0">Célibataire</SelectItem>
@@ -235,7 +233,8 @@ export default function EmployeeForm() {
                                 </Select>
                             )}
                         />
-                        {errors.SituationFamiliale && <p className="text-red-500 text-sm">{errors.SituationFamiliale.message}</p>}
+                        {errors.SituationFamiliale &&
+                            <p className="text-red-500 text-sm">{errors.SituationFamiliale.message}</p>}
                     </div>
 
                     <div className="space-y-2 p-1">
@@ -243,37 +242,45 @@ export default function EmployeeForm() {
                         <Controller
                             name="Adresse"
                             control={control}
-                            render={({ field }) => (
-                                <Textarea id="Adresse" placeholder="Enter adresse" {...field} />
+                            render={({field}) => (
+                                <Input id="Adresse" placeholder="Enter adresse" {...field} />
                             )}
                         />
                         {errors.Adresse && <p className="text-red-500 text-sm">{errors.Adresse.message}</p>}
                     </div>
-
+                    <div className="space-y-2 p-1">
+                        <Label htmlFor="LieuNaissance">Lieu de Naissance</Label>
+                        <Controller
+                            name="LieuNaissance"
+                            control={control}
+                            render={({field}) => (
+                                <Input id="LieuNaissance" placeholder="Enter lieu de naissance" {...field} />
+                            )}
+                        />
+                        {errors.LieuNaissance && <p className="text-red-500 text-sm">{errors.LieuNaissance.message}</p>}
+                    </div>
                     <div className="space-y-2 p-1">
                         <Label>Date de Recrutement</Label>
                         <Controller
                             name="DateRecrutement"
                             control={control}
-                            render={({ field }) => (
-                                <Popover>
-                                    <PopoverTrigger asChild>
-                                        <Button variant="outline" className="w-full justify-start rounded-[0.5rem] text-left font-normal">
-                                            <CalendarIcon className="mr-2 h-4 w-4" />
-                                            {field.value ? format(field.value, "PPP") : <span>Pick a date</span>}
-                                        </Button>
-                                    </PopoverTrigger>
-                                    <PopoverContent className="w-auto p-0">
-                                        <Calendar
-                                            mode="single"
-                                            selected={field.value}
-                                            onSelect={field.onChange}
-                                        />
-                                    </PopoverContent>
-                                </Popover>
+                            render={({field}) => (
+                                <div className="w-full">
+                                    // @ts-ignore
+                                    <DatePicker
+                                        aria-label="Pick a date"
+                                        // @ts-ignore
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                        placeholder="Pick a date"
+                                        isClearable
+
+                                    />
+                                </div>
                             )}
                         />
-                        {errors.DateRecrutement && <p className="text-red-500 text-sm">{errors.DateRecrutement.message}</p>}
+                        {errors.DateRecrutement &&
+                            <p className="text-red-500 text-sm">{errors.DateRecrutement.message}</p>}
                     </div>
 
                     <div className="space-y-2 p-1">
@@ -281,11 +288,12 @@ export default function EmployeeForm() {
                         <Controller
                             name="FonctionPrincipale"
                             control={control}
-                            render={({ field }) => (
+                            render={({field}) => (
                                 <Input id="FonctionPrincipale" placeholder="Enter fonction principale" {...field} />
                             )}
                         />
-                        {errors.FonctionPrincipale && <p className="text-red-500 text-sm">{errors.FonctionPrincipale.message}</p>}
+                        {errors.FonctionPrincipale &&
+                            <p className="text-red-500 text-sm">{errors.FonctionPrincipale.message}</p>}
                     </div>
 
                     <div className="space-y-2 p-1">
@@ -293,7 +301,7 @@ export default function EmployeeForm() {
                         <Controller
                             name="Grade"
                             control={control}
-                            render={({ field }) => (
+                            render={({field}) => (
                                 <Input id="Grade" placeholder="Enter grade" {...field} />
                             )}
                         />
@@ -305,8 +313,9 @@ export default function EmployeeForm() {
                         <Controller
                             name="NombreEnfants"
                             control={control}
-                            render={({ field }) => (
-                                <Input id="NombreEnfants" type="number" placeholder="Enter nombre d'enfants" {...field} />
+                            render={({field}) => (
+                                <Input id="NombreEnfants" type="number"
+                                       placeholder="Enter nombre d'enfants" {...field} />
                             )}
                         />
                         {errors.NombreEnfants && <p className="text-red-500 text-sm">{errors.NombreEnfants.message}</p>}
@@ -317,7 +326,7 @@ export default function EmployeeForm() {
                         <Controller
                             name="Categorie"
                             control={control}
-                            render={({ field }) => (
+                            render={({field}) => (
                                 <Input id="Categorie" placeholder="Enter catégorie" {...field} />
                             )}
                         />
@@ -329,7 +338,7 @@ export default function EmployeeForm() {
                         <Controller
                             name="Section"
                             control={control}
-                            render={({ field }) => (
+                            render={({field}) => (
                                 <Input id="Section" placeholder="Enter section" {...field} />
                             )}
                         />
@@ -341,7 +350,7 @@ export default function EmployeeForm() {
                         <Controller
                             name="TauxIndemniteNuisance"
                             control={control}
-                            render={({ field }) => (
+                            render={({field}) => (
                                 <Input
                                     id="TauxIndemniteNuisance"
                                     type="number"
@@ -351,7 +360,8 @@ export default function EmployeeForm() {
                                 />
                             )}
                         />
-                        {errors.TauxIndemniteNuisance && <p className="text-red-500 text-sm">{errors.TauxIndemniteNuisance.message}</p>}
+                        {errors.TauxIndemniteNuisance &&
+                            <p className="text-red-500 text-sm">{errors.TauxIndemniteNuisance.message}</p>}
                     </div>
 
                     <div className="space-y-2 p-1">
@@ -359,7 +369,7 @@ export default function EmployeeForm() {
                         <Controller
                             name="PrimeVariable"
                             control={control}
-                            render={({ field }) => (
+                            render={({field}) => (
                                 <Input
                                     id="PrimeVariable"
                                     type="number"
@@ -378,42 +388,44 @@ export default function EmployeeForm() {
                     <Label>Responsabilités</Label>
                     <div className="flex space-x-2">
                         <Select onValueChange={(value) => setNewResponsabilite(value)}>
-                            <SelectTrigger>
-                                <SelectValue placeholder="Select responsabilité" />
+                            <SelectTrigger className='border-neutral-300 shadow-lg'>
+                                <SelectValue placeholder="Select responsabilité"/>
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="1" >Responsable de poste</SelectItem>
-                                <SelectItem value="2" >Responsable de formation</SelectItem>
-                                <SelectItem value="3" >Chef de project</SelectItem>
-                                <SelectItem value="4" >Chef de service</SelectItem>
-                                <SelectItem value="5" >Chef de deparetement</SelectItem>
-                                <SelectItem value="6" >Responsable de la relation exterieure</SelectItem>
-                                <SelectItem value="7" >President de commission des oeuvres sociales</SelectItem>
+                                {respMap.map((resp) => (
+                                    <SelectItem key={resp.value} value={resp.value}>
+                                        {resp.text}
+                                    </SelectItem>
+                                ))}
                             </SelectContent>
+
                         </Select>
                         <Button
                             type="button"
                             disabled={responsabilites.length >= 3}
                             onClick={addResponsabilite}
-                            className="px-3"
+                            className="px-3 border-neutral-300 shadow-xl"
                         >
                             <PlusIcon className="h-4 w-4" />
                         </Button>
                     </div>
                     <div className="space-y-2 mt-2 p-1">
-                        {responsabilites.map((resp, index) => (
-                            <div key={index} className="flex items-center space-x-2 bg-gray-100 p-2 rounded">
-                                <span className="flex-grow">{resp}</span>
-                                <Button
-                                    variant="ghost"
-                                    size="sm"
-                                    onClick={() => removeResponsabilite(index)}
-                                    type="button"
-                                >
-                                    <XIcon className="h-4 w-4" />
-                                </Button>
-                            </div>
-                        ))}
+                        {responsabilites.map((respValue, index) => {
+                            const respText = respMap.find((resp) => resp.value === respValue)?.text || respValue;
+                            return (
+                                <div key={index} className="flex items-center space-x-2 bg-gray-100 p-2 rounded">
+                                    <span className="flex-grow">{respText}</span>
+                                    <Button
+                                        variant="ghost"
+                                        size="sm"
+                                        onClick={() => removeResponsabilite(index)}
+                                        type="button"
+                                    >
+                                        <XIcon className="h-4 w-4" />
+                                    </Button>
+                                </div>
+                            );
+                        })}
                         {errors.EmployeResponsabilites && (
                             <p className="text-red-500 text-sm">{errors.EmployeResponsabilites.message}</p>
                         )}
@@ -422,7 +434,7 @@ export default function EmployeeForm() {
 
                 <Button
                     type="submit"
-                    className="w-full"
+                    className="w-full rounded-xl text-white"
                     disabled={mutation.isLoading}
                 >
                     {mutation.isLoading ? 'Submitting...' : 'Submit'}

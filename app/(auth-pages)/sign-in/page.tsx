@@ -2,11 +2,10 @@
 import { Label } from "@/components/ui/label";
 import { signInAction } from "@/app/actions";
 import { SubmitButton } from "@/components/submit-button";
-import { Sun, CloudRain, Moon, Cloud } from 'lucide-react'
+import {  CloudRain,  Cloud } from 'lucide-react'
 import FadeBlurInput from "@/components/ui/Cool-input";
 import { FaUserAlt } from "react-icons/fa";
 import { PiPasswordLight } from "react-icons/pi";
-import {BackgroundBeamsWithCollision} from "@/components/ui/background-beams-with-collision";
 import Image from "next/image";
 import logo from "@/app/assests/logo.webp";
 import {DotBackground} from "@/components/ui/GridBackground";
@@ -23,20 +22,20 @@ export default function Login() {
                 className='min-h-screen gap-[5px] flex-col w-[40%] justify-center items-center flex relative'>
                 <div>
                     <Label
-                        className='text-xl text-black min-w-[270px] font-bold text-center uppercase tracking-wide inline-block pb-1'>
+                        className='text-xl text-sky-950 min-w-[270px] font-bold text-center uppercase tracking-wide inline-block pb-1'>
                         Tableau de bord <span
-                        className=" font-bold uppercase  bg-gradient-to-r from-blue-500 via-purple-500 to-orange-400 p-2 rounded-xl text-transparent bg-clip-text">administrateur</span>
+                        className=" font-bold uppercase  bg-gradient-to-r from-blue-800 via-purple-500 to-orange-400 p-2 rounded-xl text-transparent bg-clip-text">administrateur</span>
                     </Label>
                 </div>
                 <div className='w-[320px] sm:w-[400px] p-[2rem] mt-3 relative flex flex-col'>
                     <form className='justify-center gap-[2rem] flex-col flex'>
                         <div className='flex flex-col gap-2'>
-                            {/*<Label className='text-gradient-primary p-2 font-bold text-black '>Nom d'utilisateur</Label>*/}
-                            <FadeBlurInput name="email" required className=' shadow-[6px_6px_12px_rgba(0,0,0,0.25),-6px_-6px_12px_rgba(255,255,255,0.3)]' Icon={FaUserAlt} placeholder='Entrez votre nom'/>
+
+                            <FadeBlurInput name='email' required className=' shadow-[6px_6px_12px_rgba(0,0,0,0.25),-6px_-6px_12px_rgba(255,255,255,0.3)]' Icon={FaUserAlt} placeholder='Entrez votre nom'/>
                         </div>
                         <div className='flex flex-col gap-2'>
-                            {/*<Label htmlFor="password" className='p-2 font-bold  text-black'>Mot de pass</Label>*/}
-                            <FadeBlurInput className='shadow-[6px_6px_12px_rgba(0,0,0,0.25),-6px_-6px_12px_rgba(255,255,255,0.3)]' name="password" required Icon={PiPasswordLight}
+
+                            <FadeBlurInput type='password' className='shadow-[6px_6px_12px_rgba(0,0,0,0.25),-6px_-6px_12px_rgba(255,255,255,0.3)]' name="password" required Icon={PiPasswordLight}
                                            placeholder='enter votre mot de pass'/>
                         </div>
 
@@ -45,11 +44,14 @@ export default function Login() {
                             onMouseLeave={() => setIsHovered(false)}
                             className='px-6 py-3
                             mt-[2rem]
-                            bg-blue-400
+
                             text-white font-semibold
                             rounded-xl
                             shadow-[6px_6px_12px_rgba(0,0,0,0.25),-6px_-6px_12px_rgba(255,255,255,0.3)]
-                           hover:bg-blue-400
+
+
+
+                            hover:bg-slate-700
                             transition-all duration-300 ease-in-out
                             hover:shadow-lg hover:-translate-y-0.5
                             focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-opacity-50'
@@ -89,7 +91,7 @@ export default function Login() {
                         className='absolute top-1/2 text-center left-1/2 translate-x-[-50%] translate-y-[-50%] w-full z-20'>
                         <div className="flex flex-col items-center justify-center p-4">
 
-                            {/*<Image src={logo} alt='logo' className='h-[5rem] w-auto'/>*/}
+
 
                             <h1
                                 className="text-6xl font-bold tracking-wider inline-flex gap-4 justify-center items-center "
@@ -114,7 +116,7 @@ export default function Login() {
                             </h1>
 
                             <div
-                                className="mt-4 text-md font-medium uppercase tracking-[0.5em] bg-gradient-to-r from-blue-500 shadow-[6px_6px_12px_rgba(0,0,0,0.25),-6px_-6px_12px_rgba(255,255,255,0.3)] via-purple-500 to-orange-400 p-2 rounded-xl text-white">
+                                className="mt-4 text-md font-medium uppercase tracking-[0.5em] bg-gradient-to-r from-blue-800  via-purple-500 to-orange-400 shadow-[6px_6px_12px_rgba(0,0,0,0.25),-6px_-6px_12px_rgba(255,255,255,0.3)] p-2 rounded-xl text-white">
                                 office National de la Meteorologie
                             </div>
                         </div>

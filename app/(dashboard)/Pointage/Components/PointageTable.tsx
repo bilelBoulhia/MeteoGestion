@@ -8,12 +8,13 @@ import React, {useEffect, useState} from "react";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/Card";
 
 
-const customStyles = {
+export const customStyles = {
     table: {
         style: {
             width: "100%",
             backgroundColor: 'transparent',
             overflow:'hidden',
+            borderRadius: '7px',
             color: 'white',
 
 
@@ -21,19 +22,17 @@ const customStyles = {
     },
     rows: {
         style: {
-            backgroundColor: 'black',
+            backgroundColor: '#082f49',
             minHeight: '72px',
             padding: '2px',
-            borderBottomLeftRadius:'7px',
-            borderBottomRightRadius:' 7px',
+
 
         },
     },
     headRow: {
         style: {
-            backgroundColor: 'black',
-            borderTopLeftRadius:' 7px',
-            borderTopRightRadius:' 7px',
+            backgroundColor: 'white',
+
             padding: '5px',
 
             color: 'black',
@@ -47,7 +46,7 @@ const customStyles = {
             borderRadius:'0.5rem',
             margin:'5px',
             fontWeight: 'bold',
-            backgroundColor:'white'
+
         },
     },
     cells: {
@@ -102,7 +101,7 @@ export default function PointageTable(props: propType) {
 
     return (
         <div className="w-full h-full   flex items-center justify-center flex-col mt-5  gap-[3rem] p-0 m-0">
-            <Card className="w-full max-w-md">
+            <Card className="w-full bg-sky-950 max-w-md">
                 <CardHeader>
                     <CardTitle className="text-2xl font-bold text-center">Pointage</CardTitle>
                 </CardHeader>

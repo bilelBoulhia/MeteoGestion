@@ -118,7 +118,7 @@ export default function DemandForm() {
                   className="max-w-3xl mx-auto space-y-8 bg-white shadow-lg rounded-xl p-8 border border-gray-200">
                 <div className="border-b border-gray-200 pb-6">
                     <h1 className="text-3xl font-bold text-gray-900 text-center">
-                        Fiche d'attachement
+                        Demand de changement
                     </h1>
                 </div>
 
