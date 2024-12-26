@@ -86,7 +86,7 @@ export default function PointageTable(props: propType) {
     );
 
     const [currentTime, setCurrentTime] = useState(new Date())
-    const [responseMessage, setResponseMessage] = useState<string | null>(null)
+
 
     useEffect(() => {
         const timer = setInterval(() => {
