@@ -1,6 +1,6 @@
 
 import { GeistSans } from "geist/font/sans";
-import { ThemeProvider } from "next-themes";
+
 
 import "./globals.css";
 import React from "react";

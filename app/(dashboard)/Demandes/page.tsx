@@ -1,13 +1,9 @@
-import Pointage from "@/app/(dashboard)/Pointage/action";
-import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/Tabs";
-import FAForm from "@/app/(dashboard)/Documents/Components/FicheAttachementForm";
-import DemandForm from "@/app/(dashboard)/Demandes/Components/DemandForm";
-import DemandTable from "@/app/(dashboard)/Demandes/Components/DemandList";
-import FichDemand from "@/app/(dashboard)/Demandes/action";
 
-export type propType = {
-    data : any[]
-}
+import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/Tabs";
+
+import DemandForm from "@/app/(dashboard)/Demandes/Components/DemandForm";
+
+import FichDemand from "@/app/(dashboard)/Demandes/action";
 
 export default  function Page() {
 

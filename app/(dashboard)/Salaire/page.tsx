@@ -1,10 +1,8 @@
 
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/Tabs";
-import EmployeeForm from "@/app/(dashboard)/ServicePersonnal/Components/EmployeeForm";
-import Employee from "@/app/(dashboard)/ServicePersonnal/action";
-import GrilleSalaireForm from "@/app/(dashboard)/ServicePersonnal/Components/GrilleSalaireForm";
+
 import BulletinSalaireForm from "@/app/(dashboard)/Salaire/Components/BulletinSalaireForm";
-import BillSailareList from "@/app/(dashboard)/Salaire/Components/BillSailareList";
+
 import Bulletin from "@/app/(dashboard)/Salaire/action";
 
 

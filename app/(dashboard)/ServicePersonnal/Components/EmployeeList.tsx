@@ -1,8 +1,8 @@
 'use client';
 
 import { propType } from "@/app/(dashboard)/Pointage/page";
-import {QueryClient, useQuery, useQueryClient} from "@tanstack/react-query";
-import {DeleteData, fetchData} from "@/app/api/actions";
+import {QueryClient, useQueryClient} from "@tanstack/react-query";
+import {DeleteData} from "@/app/api/actions";
 import DataTable from 'react-data-table-component';
 import React from "react";
 
@@ -15,9 +15,9 @@ import {
     AlertDialogTrigger
 } from "@/components/ui/alert-dialog";
 import {TrashIcon} from "lucide-react";
-import {Button} from "@/components/ui/button";
+
 import {customStyles} from "@/app/(dashboard)/Pointage/Components/PointageTable";
-import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/Card";
+
 
 
 
@@ -82,13 +82,7 @@ export default function EmployeeTable(props: propType) {
 
         ];
 
-    const { data } = useQuery(
-        ['emp'],
-        {
-            queryFn: () => fetchData('Employe/GetAllEmployes'),
-            initialData: props.data,
-        }
-    );
+
 
 
 
@@ -98,7 +92,7 @@ export default function EmployeeTable(props: propType) {
         <div className="w-full h-full flex items-center  justify-center flex-col mt-[5rem] p-0 m-0">
             <DataTable
                 columns={columns}
-                data={data}
+                data={props.data}
                 noHeader
                 customStyles={customStyles}
             />

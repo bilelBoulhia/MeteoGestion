@@ -1,8 +1,8 @@
 'use client';
 
 import { propType } from "@/app/(dashboard)/Pointage/page";
-import {QueryClient, useQuery, useQueryClient} from "@tanstack/react-query";
-import {DeleteData, fetchData} from "@/app/api/actions";
+import {QueryClient,  useQueryClient} from "@tanstack/react-query";
+import {DeleteData} from "@/app/api/actions";
 import DataTable from 'react-data-table-component';
 import React from "react";
 
@@ -85,13 +85,6 @@ export default function DemandTable(props: propType) {
 
         ];
 
-    const { data } = useQuery(
-        ['demand'],
-        {
-            queryFn: () => fetchData('Document/GetAllEmployeDemands'),
-            initialData: props.data,
-        }
-    );
 
 
 
@@ -102,7 +95,7 @@ export default function DemandTable(props: propType) {
         <div className="w-full h-full flex items-center justify-center flex-col mt-5 p-0 m-0">
             <DataTable
                 columns={columns}
-                data={data}
+                data={props.data}
                 noHeader
                 customStyles={customStyles}
             />

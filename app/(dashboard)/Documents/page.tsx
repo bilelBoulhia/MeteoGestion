@@ -1,12 +1,10 @@
-import Pointage from "@/app/(dashboard)/Pointage/action";
+
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/Tabs";
 import FAForm from "@/app/(dashboard)/Documents/Components/FicheAttachementForm";
-import FATable from "@/app/(dashboard)/Documents/Components/FichAttachementList";
+
 import FichesAtt from "@/app/(dashboard)/Documents/action";
 
-export type propType = {
-    data : any[]
-}
+
 
 export default  function Page() {
 

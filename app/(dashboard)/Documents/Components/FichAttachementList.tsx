@@ -1,10 +1,10 @@
 'use client';
 
 import { propType } from "@/app/(dashboard)/Pointage/page";
-import {QueryClient, useQuery, useQueryClient} from "@tanstack/react-query";
-import {DeleteData, fetchData} from "@/app/api/actions";
+import {QueryClient,  useQueryClient} from "@tanstack/react-query";
+import {DeleteData} from "@/app/api/actions";
 import DataTable from 'react-data-table-component';
-import React, {useEffect} from "react";
+import React from "react";
 
 import {
     AlertDialog, AlertDialogAction, AlertDialogCancel,
@@ -82,26 +82,14 @@ export default function FATable(props: propType) {
                 allowOverflow: true,
                 button: true,
             },
-
-        ];
-
-    const { data } = useQuery(
-        ['fiche'],
-        {
-            queryFn: () => fetchData('Document/GetAllEmployeFA'),
-            initialData: props.data,
-        }
-    );
-
-
-
+        ]
 
 
     return (
         <div className="w-full h-full flex items-center justify-center flex-col mt-[5rem] p-0 m-0">
             <DataTable
                 columns={columns}
-                data={data}
+                data={props.data}
                 noHeader
                 customStyles={customStyles}
             />

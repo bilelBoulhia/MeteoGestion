@@ -75,7 +75,6 @@ export default function BillSailareList(props: propType) {
     const { data } = useQuery(
         ['bulletins', selectedMonth, selectedYear],
         {
-            queryFn: () => fetchData(`Salary/GetAllBulletinsByMonth?month=${selectedMonth}&year=${selectedYear}`),
             initialData: props.data,
         }
     );

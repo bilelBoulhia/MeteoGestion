@@ -1,8 +1,7 @@
 'use client';
 
 import { propType } from "@/app/(dashboard)/Pointage/page";
-import { useQuery } from "@tanstack/react-query";
-import { fetchData } from "@/app/api/actions";
+
 import DataTable from 'react-data-table-component';
 import React, {useEffect, useState} from "react";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/Card";
@@ -77,13 +76,6 @@ const columns =
 
 
 export default function PointageTable(props: propType) {
-    const { data } = useQuery(
-        ['pointage'],
-        {
-            queryFn: () => fetchData('Pointage/GetAllPointageToday'),
-            initialData: props.data,
-        }
-    );
 
     const [currentTime, setCurrentTime] = useState(new Date())
 
@@ -121,7 +113,7 @@ export default function PointageTable(props: propType) {
 
             <DataTable
                 columns={columns}
-                data={data}
+                data={props.data}
                 noHeader
                 customStyles={customStyles}
             />

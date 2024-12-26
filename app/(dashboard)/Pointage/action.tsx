@@ -2,7 +2,7 @@
 
 import {fetchData} from "@/app/api/actions";
 import PointageTable from "@/app/(dashboard)/Pointage/Components/PointageTable";
-import EmployeeTable from "@/app/(dashboard)/ServicePersonnal/Components/EmployeeList";
+
 import EmployeePointageTable from "@/app/(dashboard)/Pointage/Components/EmployeePointageTable";
 
 

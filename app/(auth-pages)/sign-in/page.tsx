@@ -31,7 +31,7 @@ export default function Login() {
                     <form className='justify-center gap-[2rem] flex-col flex'>
                         <div className='flex flex-col gap-2'>
 
-                            <FadeBlurInput name='email' required className=' shadow-[6px_6px_12px_rgba(0,0,0,0.25),-6px_-6px_12px_rgba(255,255,255,0.3)]' Icon={FaUserAlt} placeholder='Entrez votre nom'/>
+                            <FadeBlurInput name='email' required className='shadow-[6px_6px_12px_rgba(0,0,0,0.25),-6px_-6px_12px_rgba(255,255,255,0.3)]' Icon={FaUserAlt} placeholder='Entrez votre nom'/>
                         </div>
                         <div className='flex flex-col gap-2'>
 

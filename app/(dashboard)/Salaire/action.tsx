@@ -9,7 +9,7 @@ import BillSailareList from "@/app/(dashboard)/Salaire/Components/BillSailareLis
 export default async  function Bulletin(){
     const data = await fetchData('Salary/GetAllBulletinsByMonth?month=12&year=2024');
 
-    console.table(data);
+
     if(data === null) return null;
     return <BillSailareList  data={data}/>;
 

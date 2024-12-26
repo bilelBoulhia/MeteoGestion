@@ -3,7 +3,6 @@
 import {fetchData} from "@/app/api/actions";
 
 
-import FATable from "@/app/(dashboard)/Documents/Components/FichAttachementList";
 import DemandTable from "@/app/(dashboard)/Demandes/Components/DemandList";
 
 

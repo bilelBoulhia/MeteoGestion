@@ -1,7 +1,7 @@
 'use client';
 import { propType } from "@/app/(dashboard)/Pointage/page";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { fetchData } from "@/app/api/actions";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
 import DataTable from 'react-data-table-component';
 import React, { useState } from "react";
 import { customStyles } from "@/app/(dashboard)/Pointage/Components/PointageTable";
@@ -34,7 +34,6 @@ export default function EmployeePointageTable(props: EmployeePointageTableProps)
         },
         onSuccess: (data) => {
             setResponseMessage(data.message || 'Pointage successful!');
-
             queryClient.invalidateQueries(['alreadyPointed']);
         },
         onError: (error: any) => {
@@ -42,21 +41,8 @@ export default function EmployeePointageTable(props: EmployeePointageTableProps)
         },
     });
 
-    const { data: employeeData, isLoading: isLoadingEmployees } = useQuery(
-        ['emp'],
-        {
-            queryFn: () => fetchData('Employe/GetAllEmployes'),
-            initialData: props.data,
-        }
-    );
 
-    const { data: alreadyPointedToday, isLoading: isLoadingPointage } = useQuery(
-        ['alreadyPointed'],
-        {
-            queryFn: () => fetchData('Pointage/GetAllPointageToday'),
-            initialData: props.pData,
-        }
-    );
+
 
     const columns = [
         { name: 'nss', selector: (row: any) => row.nss, sortable: true },
@@ -71,7 +57,7 @@ export default function EmployeePointageTable(props: EmployeePointageTableProps)
             cell: (row: any) => (
                 <div className="flex gap-2">
                     <ToggleAction
-                        WillbeDisabled={isLoadingPointage ? true : checkIfExists(row, alreadyPointedToday)}
+                        WillbeDisabled={checkIfExists(row,  props.pData)}
                         onToggle={async () => mutation.mutate(row.nss)}
                     />
                 </div>
@@ -86,10 +72,9 @@ export default function EmployeePointageTable(props: EmployeePointageTableProps)
         <div className="w-full h-full flex items-center justify-center flex-col mt-[5rem] p-0 m-0">
             <DataTable
                 columns={columns}
-                data={employeeData}
+                data={props.data}
                 noHeader
                 customStyles={customStyles}
-                progressPending={isLoadingEmployees || isLoadingPointage}
             />
             {responseMessage && (
                 <Toast message={responseMessage} show={true} />
