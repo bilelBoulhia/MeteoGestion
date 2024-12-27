@@ -18,11 +18,11 @@ import {Controller, useForm} from "react-hook-form"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 
-import {fetchData} from "@/app/api/actions";
 import {useState, useEffect} from "react";
 
 import Toast from "@/components/ui/toast";
 import {Textarea} from "@/components/ui/textarea";
+import {baseapi} from "@/app/constants";
 
 
 interface DemandData {
@@ -64,7 +64,10 @@ export default function DemandForm() {
     const { data: empData } = useQuery(
         ['emp'],
         {
-            queryFn: () => fetchData('Employe/GetAllEmployes'),
+            queryFn: async () => {
+                const response = await axios.get(`${baseapi}/api/Employe/GetAllEmployes`);
+                return response.data;
+            },
         }
     );
 
@@ -86,7 +89,7 @@ export default function DemandForm() {
                 "commentaires": data.Commentaires
             };
             const res = await axios.post(
-                'http://localhost:5007/api/Document/PostDemendeChangemnt',
+                `${baseapi}/api/Document/PostDemendeChangemnt`,
                 formattedData,
                 {
                     headers: {

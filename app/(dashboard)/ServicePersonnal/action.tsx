@@ -1,14 +1,16 @@
 'use server'
 
-import {fetchData} from "@/app/api/actions";
+
 
 import EmployeeTable from "@/app/(dashboard)/ServicePersonnal/Components/EmployeeList";
+import axios from "axios";
+import {baseapi} from "@/app/constants";
 
 
 export default async  function Employee(){
-    const data = await fetchData('Employe/GetAllEmployes');
+    const res = await axios.get(`${baseapi}/api/Employe/GetAllEmployes`);
+    const data =res.data;
 
-    if(data === null) return null;
     return <EmployeeTable  data={data}/>;
 
 }

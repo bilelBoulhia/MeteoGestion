@@ -8,6 +8,7 @@ import { customStyles } from "@/app/(dashboard)/Pointage/Components/PointageTabl
 import ToggleAction from "@/components/ui/Toggle";
 import axios from "axios";
 import Toast from "@/components/ui/toast";
+import {baseapi} from "@/app/constants";
 
 function checkIfExists(row: any, alreadyPointedToday: any[]) {
     if (!Array.isArray(alreadyPointedToday)) return false;
@@ -23,7 +24,7 @@ export default function EmployeePointageTable(props: EmployeePointageTableProps)
     const mutation = useMutation({
         mutationFn: async (employeeID: string) => {
             const response = await axios.post(
-                'http://localhost:5007/api/Pointage/PostPointage',
+                `${baseapi}/api/Pointage/PostPointage`,
                 JSON.stringify(employeeID),
                 {
                     headers: {

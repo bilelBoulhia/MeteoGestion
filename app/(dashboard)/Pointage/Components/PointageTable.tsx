@@ -1,7 +1,6 @@
 'use client';
 
 import { propType } from "@/app/(dashboard)/Pointage/page";
-
 import DataTable from 'react-data-table-component';
 import React, {useEffect, useState} from "react";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/Card";

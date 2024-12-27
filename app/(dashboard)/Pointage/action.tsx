@@ -1,24 +1,29 @@
 'use server'
 
-import {fetchData} from "@/app/api/actions";
+
 import PointageTable from "@/app/(dashboard)/Pointage/Components/PointageTable";
 
 import EmployeePointageTable from "@/app/(dashboard)/Pointage/Components/EmployeePointageTable";
+import axios from "axios";
+import {baseapi} from "@/app/constants";
 
 
 export default async  function Pointage(){
-    const data = await fetchData('Pointage/GetAllPointage');
+    const response = await axios.get(`${baseapi}/api/Pointage/GetAllPointageToday`);
+    const data = response.data;
 
-    if(data === null) return null;
+
     return <PointageTable  data={data}/>;
 
 }
 
 export  async  function EmployeePointage(){
-    const data = await fetchData('Employe/GetAllEmployes');
-    const pData = await fetchData('Pointage/GetAllPointageToday');
+    const response = await axios.get(`${baseapi}/api/Employe/GetAllEmployes`);
+    const presponse = await axios.get(`${baseapi}/api/Pointage/GetAllPointageToday`);
 
-    if(data === null) return null;
+    const data = response.data;
+    const pData = presponse.data;
+
     return <EmployeePointageTable pData={pData} data={data}/>;
 
 }

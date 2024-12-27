@@ -14,7 +14,9 @@ import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 import Toast from '@/components/ui/toast'
 import {DatePicker} from "@nextui-org/date-picker";
+import {baseapi} from "@/app/constants";
 
+import { DateValue } from '@react-types/datepicker';
 const schema = yup.object({
     NSS: yup.string().required("NSS is required"),
     Nom: yup.string().required("Nom is required"),
@@ -49,6 +51,11 @@ const schema = yup.object({
         .of(yup.string().required("Responsabilité is required"))
         .required("Employe responsabilités is required"),
 }).required();
+
+
+
+
+
 
 export default function EmployeeForm() {
     const [responsabilites, setResponsabilites] = useState<string[]>([])
@@ -96,7 +103,7 @@ export default function EmployeeForm() {
 
     const mutation = useMutation({
         mutationFn: (data: any) => {
-            return axios.post('http://localhost:5007/api/Employe/CreateEmploye', data)
+            return axios.post(`${baseapi}/api/Employe/CreateEmploye`, data)
         }
     })
 
@@ -128,6 +135,8 @@ export default function EmployeeForm() {
     })
 
 
+
+    // @ts-ignore
     return (
         <div className="min-h-screen  p-8">
             <form onSubmit={onSubmit} className="max-w-4xl mx-auto space-y-8 bg-white shadow-lg rounded-[0.5rem] p-8 border border-gray-200">
@@ -172,18 +181,17 @@ export default function EmployeeForm() {
 
                     <div className="space-y-2 p-1">
                         <Label>Date de Naissance</Label>
+
                         <Controller
                             name="DateNaissance"
                             control={control}
                             render={({field}) => (
 
+
                                 <DatePicker
                                     aria-label="Pick a date"
-                                    // @ts-ignore
-                                    value={field.value}
-                                    onChange={field.onChange}
-                                    placeholder="Pick a date"
-                                    isClearable
+                                    value={field.value as unknown as DateValue | null}
+                                    onChange={field.onChange as unknown as (value: DateValue | null) => void}
 
                                 />
                             )}
@@ -263,15 +271,14 @@ export default function EmployeeForm() {
                             name="DateRecrutement"
                             control={control}
                             render={({field}) => (
+
                                 <div className="w-full">
-                                    // @ts-ignore
+
+
                                     <DatePicker
                                         aria-label="Pick a date"
-                                        // @ts-ignore
-                                        value={field.value}
-                                        onChange={field.onChange}
-                                        placeholder="Pick a date"
-                                        isClearable
+                                        value={field.value as unknown as DateValue | null}
+                                        onChange={field.onChange as unknown as (value: DateValue | null) => void}
 
                                     />
                                 </div>

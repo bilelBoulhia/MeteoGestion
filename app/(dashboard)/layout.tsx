@@ -2,7 +2,7 @@
 
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
 
-import {IconArrowLeft, IconPigMoney, IconServicemark, IconSettings, IconUserBolt} from "@tabler/icons-react";
+import {IconArrowLeft, IconUserBolt} from "@tabler/icons-react";
 import { useState} from "react";
 import {cn} from "@/utils/cn";
 import {signOutAction} from "@/app/actions";

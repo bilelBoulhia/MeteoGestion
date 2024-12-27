@@ -17,11 +17,10 @@ import axios from "axios"
 import {Controller, useForm} from "react-hook-form"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
-
-import {fetchData} from "@/app/api/actions";
 import {useState, useEffect} from "react";
 import {MonthYearPicker} from "@/components/ui/components_month-year-picker";
 import Toast from "@/components/ui/toast";
+import {baseapi} from "@/app/constants";
 
 
 interface FicheAttachementData {
@@ -69,7 +68,10 @@ export default function FAForm() {
     const { data: empData } = useQuery(
         ['emp'],
         {
-            queryFn: () => fetchData('Employe/GetAllEmployes'),
+            queryFn: async () => {
+                const res = await axios.get(`${baseapi}/api/Employe/GetAllEmployes`)
+                return res.data
+            }
         }
     );
 
@@ -102,7 +104,7 @@ export default function FAForm() {
 
             };
             const res = await axios.post(
-                'http://localhost:5007/api/Document/PostEmployeFA',
+                `${baseapi}/api/Document/PostEmployeFA`,
                 formattedData,
                 {
                     headers: {

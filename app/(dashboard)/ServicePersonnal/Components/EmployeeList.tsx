@@ -2,7 +2,7 @@
 
 import { propType } from "@/app/(dashboard)/Pointage/page";
 import {QueryClient, useQueryClient} from "@tanstack/react-query";
-import {DeleteData} from "@/app/api/actions";
+
 import DataTable from 'react-data-table-component';
 import React from "react";
 
@@ -17,6 +17,8 @@ import {
 import {TrashIcon} from "lucide-react";
 
 import {customStyles} from "@/app/(dashboard)/Pointage/Components/PointageTable";
+import axios from "axios";
+import {baseapi} from "@/app/constants";
 
 
 
@@ -27,7 +29,7 @@ import {customStyles} from "@/app/(dashboard)/Pointage/Components/PointageTable"
 const handleDelete = async (nss: string,Q:QueryClient) => {
 
     try {
-        await DeleteData('Employe/DeleteEmploye/',nss);
+        await axios.delete(`${baseapi}/api/Employe/DeleteEmploye/`,{data:nss});
         await Q.invalidateQueries(['emp']);
     } catch (error) {
         console.error('Error deleting employee:', error);

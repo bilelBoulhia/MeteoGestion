@@ -10,7 +10,7 @@ export default  function Page() {
 
    return(
        <div className="flex flex-col relative   text-center    w-full ">
-           <Tabs className='mt-5  ' defaultValue="List">
+           <Tabs className='mt-5 ' defaultValue="List">
                <TabsList>
                    <TabsTrigger className='' value="List">pointage d'aujourd'hui</TabsTrigger>
                    <TabsTrigger className='' value="ajoute">operation de pointage</TabsTrigger>

@@ -18,10 +18,10 @@ import {Controller, useForm} from "react-hook-form"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 
-import {fetchData} from "@/app/api/actions";
 import {useState, useEffect} from "react";
 
 import Toast from "@/components/ui/toast";
+import {baseapi} from "@/app/constants";
 
 
 interface GrilleSalaire {
@@ -57,7 +57,10 @@ export default function GrilleSalaireForm() {
     const { data: empData } = useQuery(
         ['emp'],
         {
-            queryFn: () => fetchData('Employe/GetAllEmployes'),
+            queryFn: async () => {
+                const res = await  axios.get(`${baseapi}Employe/GetAllEmployes`);
+                return res.data
+            }
         }
     );
     const [selectedEmployee, setSelectedEmployee] = useState<string>('')
@@ -76,7 +79,7 @@ export default function GrilleSalaireForm() {
 
             };
             const res = await axios.post(
-                'http://localhost:5007/api/Employe/CreateGrilleSalaire',
+                `${baseapi}/api/Employe/CreateGrilleSalaire`,
                 formattedData,
                 {
                     headers: {
