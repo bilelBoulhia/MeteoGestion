@@ -1,16 +1,17 @@
 'use client';
 
-import { propType } from "@/app/(dashboard)/Pointage/page";
 import { useQuery } from "@tanstack/react-query";
 
 import DataTable from 'react-data-table-component';
 import React, { useState } from "react";
 import {MonthYearPicker} from "@/components/ui/components_month-year-picker";
 import {customStyles} from "@/app/(dashboard)/Pointage/Components/PointageTable";
+import axios from "axios";
+import {baseapi} from "@/app/constants";
 
 
 
-export default function BillSailareList(props: propType) {
+export default function BillSailareList() {
     const [selectedMonth, setSelectedMonth] = useState("12");
     const [selectedYear, setSelectedYear] = useState("2024");
 
@@ -75,8 +76,13 @@ export default function BillSailareList(props: propType) {
     const { data } = useQuery(
         ['bulletins', selectedMonth, selectedYear],
         {
-            initialData: props.data,
-        }
+           queryFn : async ()=> {
+
+               const res = await axios.get(`${baseapi}/api/Salary/GetAllBulletinsByMonth?month=${selectedMonth}&year=${selectedYear}`)
+               return res.data;
+           }
+           }
+
     );
 
     return (

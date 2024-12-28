@@ -2,8 +2,7 @@
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/Tabs";
 
 import BulletinSalaireForm from "@/app/(dashboard)/Salaire/Components/BulletinSalaireForm";
-
-import Bulletin from "@/app/(dashboard)/Salaire/action";
+import BillSailareList from "@/app/(dashboard)/Salaire/Components/BillSailareList";
 
 
 
@@ -18,7 +17,7 @@ export default  function Page() {
 
                 </TabsList>
                 <TabsContent value="List">
-                    <Bulletin/>
+                    <BillSailareList/>
                 </TabsContent>
                 <TabsContent value="ajouter">
                     <BulletinSalaireForm/>
