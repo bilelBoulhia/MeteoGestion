@@ -1,1 +1,1 @@
-export const baseapi = "https://bilelboulhia-gestionpaieapi.sliplane.app";
+export const baseapi = "https://meteogestionpaieapi.onrender.com";
