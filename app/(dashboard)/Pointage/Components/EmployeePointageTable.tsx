@@ -24,17 +24,17 @@ export default function EmployeePointageTable(props: EmployeePointageTableProps)
     const mutation = useMutation({
         mutationFn: async (employeeID: string) => {
             const response = await axios.post(
-                `${baseapi}/api/Pointage/PostPointage`,
+                `${baseapi}/api/Pointage/PostPointag`,
                 JSON.stringify(employeeID),
                 {
                     headers: {
                         'Content-Type': 'application/json'
                     }
                 })
+            setResponseMessage(response.data);
             return response.data;
         },
-        onSuccess: (data) => {
-            setResponseMessage(data.message || 'Pointage successful!');
+        onSuccess: () => {
             queryClient.invalidateQueries(['alreadyPointed']);
         },
         onError: (error: any) => {

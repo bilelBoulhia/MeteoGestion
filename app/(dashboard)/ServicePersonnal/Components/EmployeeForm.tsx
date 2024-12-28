@@ -104,8 +104,18 @@ export default function EmployeeForm() {
     const mutation = useMutation({
         mutationFn: (data: any) => {
             return axios.post(`${baseapi}/api/Employe/CreateEmploye`, data)
-        }
-    })
+        },
+        onSuccess: () => {
+            reset();
+            setResponsabilites([]);
+            setResponseMessage("Employe created successfully!");
+        },
+        onError: (error: any) => {
+            const errorMessage = error?.response?.data || 'An unexpected error occurred.';
+            setResponseMessage(errorMessage);
+        },
+    });
+
 
     const addResponsabilite = () => {
         if (newResponsabilite.trim() && responsabilites.length < 3) {
@@ -113,7 +123,7 @@ export default function EmployeeForm() {
             setNewResponsabilite('')
         }
     }
-
+    const [responseMessage, setResponseMessage] = useState<string | null>(null);
     const removeResponsabilite = (index: number) => {
         setResponsabilites(responsabilites.filter((_, i) => i !== index))
     }
@@ -123,16 +133,9 @@ export default function EmployeeForm() {
             ...data,
             EmployeResponsabilites: responsabilites,
         }
-        mutation.mutate(payload,{
-            onSuccess: () => {
-                reset();
-                setResponsabilites([]);
-            },
-            onError: (error) => {
-                console.error("Submission error:", error);
-            },
-        })
+        mutation.mutate(payload)
     })
+
 
 
 
@@ -445,12 +448,8 @@ export default function EmployeeForm() {
                     {mutation.isLoading ? 'Submitting...' : 'Submit'}
                 </Button>
 
-                {mutation.isError && (
-                    <Toast show={true} message='error dans le server , eassyer later' />
-                )}
-
-                {mutation.isSuccess && (
-                    <Toast show={true} message='employee ont ete ajouter' />
+                {responseMessage && (
+                    <Toast message={responseMessage} show={true} />
                 )}
             </form>
         </div>

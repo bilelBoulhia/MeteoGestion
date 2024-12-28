@@ -18,7 +18,7 @@ import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 
 
-import {useState, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import {MonthYearPicker} from "@/components/ui/components_month-year-picker";
 import Toast from "@/components/ui/toast";
 import {baseapi} from "@/app/constants";
@@ -68,6 +68,7 @@ export default function BulletinSalaireForm() {
     const [selectedEmployee, setSelectedEmployee] = useState<string>('')
     const [selectedMonth, setSelectedMonth] = useState('')
     const [selectedYear, setSelectedYear] = useState('')
+    const [responseMessage, setResponseMessage] = useState<string | null>(null);
 
     useEffect(() => {
         setValue('NSS_EMPLOYE', selectedEmployee);
@@ -100,8 +101,12 @@ export default function BulletinSalaireForm() {
                     }
                 }
             );
+            setResponseMessage(res.data);
             return res.data;
-        }
+        },
+        onError: (error: any) => {
+            setResponseMessage(error.response?.data?.message || 'failed . Please try again.');
+        },
     });
 
     const onSubmit = handleSubmit((data) => {
@@ -181,11 +186,8 @@ export default function BulletinSalaireForm() {
                 </div>
             </form>
 
-            {mutation.isError && (
-                <Toast show={true} message="Erreur dans le server,creer la fiche d'attachement d'abord"/>
-            )}
-            {mutation.isSuccess && (
-                <Toast show={true} message="Bulletin a été generer"/>
+            {responseMessage && (
+                <Toast message={responseMessage} show={true} />
             )}
         </div>
     )

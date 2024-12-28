@@ -58,12 +58,13 @@ export default function GrilleSalaireForm() {
         ['emp'],
         {
             queryFn: async () => {
-                const res = await  axios.get(`${baseapi}Employe/GetAllEmployes`);
+                const res = await  axios.get(`${baseapi}/api/Employe/GetAllEmployes`);
                 return res.data
             }
         }
     );
     const [selectedEmployee, setSelectedEmployee] = useState<string>('')
+    const [responseMessage, setResponseMessage] = useState<string | null>(null);
     useEffect(() => {
         setValue('NSS_EMPLOYE', selectedEmployee);
     }, [selectedEmployee, setValue]);
@@ -87,20 +88,23 @@ export default function GrilleSalaireForm() {
                     }
                 }
             );
+            setResponseMessage(res.data);
             return res.data;
-        }
+        },
+        onSuccess: () => {
+            reset();
+            setSelectedEmployee('');
+        },
+        onError: () => {
+            setResponseMessage('An unexpected error occurred.');
+        },
+
     });
 
+
+
     const onSubmit = handleSubmit((data) => {
-        mutation.mutate(data, {
-            onSuccess: () => {
-                reset();
-                setSelectedEmployee('');
-                },
-            onError: (error) => {
-                console.error("Submission error:", error);
-            },
-        })
+        mutation.mutate(data)
     })
 
 
@@ -203,11 +207,8 @@ export default function GrilleSalaireForm() {
                 </div>
             </form>
 
-            {mutation.isError && (
-                <Toast show={true} message="Error dans le server, essayer plus tard,"/>
-            )}
-            {mutation.isSuccess && (
-                <Toast show={true} message="Grille de salaire a été ajouté"/>
+            {responseMessage && (
+                <Toast message={responseMessage} show={true} />
             )}
         </div>
     )

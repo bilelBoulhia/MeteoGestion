@@ -17,17 +17,18 @@ export interface InputProps
 
 const FadeBlurInput = React.forwardRef<HTMLInputElement, InputProps>(
     ({ className, type,Icon, ...props }, ref) => {
+        // @ts-ignore
         return (
             <div className="relative inline-flex w-full">
                 <input
-
                     type={type}
                     className={cn(
                         className,
-                        'w-full p-2 pr-12 focus:bg-sky-950 focus:text-white pl-5 placeholder:text-white bg-sky-950 rounded-xl focus:outline-none text-white'
+                        'w-full  p-2 pr-12 focus:bg-sky-950 focus:text-white pl-5 placeholder:text-white bg-sky-950 rounded-xl focus:outline-none text-white'
                     )}
                     ref={ref}
                     {...props}
+
                 />
 
 
