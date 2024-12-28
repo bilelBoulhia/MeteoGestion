@@ -1,1 +1,1 @@
-export const baseapi = "http://localhost:5007";
+export const baseapi = "https://bilelboulhia-gestionpaieapi.sliplane.app";

@@ -1,4 +1,5 @@
 'use server'
+
 import FATable from "@/app/(dashboard)/Documents/Components/FichAttachementList";
 import axios from "axios";
 import {baseapi} from "@/app/constants";
