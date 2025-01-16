@@ -3,7 +3,9 @@ import { type NextRequest, NextResponse } from "next/server";
 
 export const updateSession = async (request: NextRequest) => {
 
-  try {
+    //auth has been disabled since it's a demo app only
+
+ /* try {
 
     let response = NextResponse.next({
       request: {
@@ -43,10 +45,15 @@ export const updateSession = async (request: NextRequest) => {
       return NextResponse.redirect(new URL("/sign-in", request.url));
     }
 
-    if (request.nextUrl.pathname === "/" && !user.error) {
-      return NextResponse.redirect(new URL("/Pointage", request.url));
-    }
+    */
 
+  //&& !user.error
+
+
+    if (request.nextUrl.pathname === "/" ) {
+      return NextResponse.redirect(new URL("/sign-in", request.url));
+    }
+/*
     return response;
   } catch (e) {
 
@@ -56,4 +63,5 @@ export const updateSession = async (request: NextRequest) => {
       },
     });
   }
+  */
 };
