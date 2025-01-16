@@ -24,7 +24,7 @@ export default function EmployeePointageTable(props: EmployeePointageTableProps)
     const mutation = useMutation({
         mutationFn: async (employeeID: string) => {
             const response = await axios.post(
-                `${baseapi}/api/Pointage/PostPointag`,
+                `${baseapi}/api/Pointage/PostPointage`,
                 JSON.stringify(employeeID),
                 {
                     headers: {
