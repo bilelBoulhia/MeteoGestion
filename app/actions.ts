@@ -10,17 +10,19 @@ import { redirect } from "next/navigation";
 export const signInAction = async (formData: FormData) => {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
-  const supabase = await createClient();
 
-  const { error } = await supabase.auth.signInWithPassword({
-    email,
-    password,
-  });
+  //since this is a demo auth doesn't matter here if you want to use supabase auth uncomment this function below and a anon key and project url to env file
+
+  /* const supabase = await createClient();
+   const { error } = await supabase.auth.signInWithPassword({
+     email,
+     password,
+   });
 
 
-  if (error) {
-    return encodedRedirect("error", "/sign-in", error.message);
-  }
+   if (error) {
+     return encodedRedirect("error", "/sign-in", error.message);
+   }*/
 
   return redirect("/Pointage");
 };
